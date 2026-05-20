@@ -1,0 +1,55 @@
+// Esta tabla guarda la información específica de un entrenador.
+// User guarda lo común; TrainerProfile guarda lo propio del entrenador.
+model TrainerProfile {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Conecta este perfil con un usuario de tipo TRAINER.
+  userId      String   @unique @db.Uuid
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Especialidad del entrenador, por ejemplo Strength, HIIT o Nutrition.
+  specialty   String
+
+  // Descripción pública del entrenador.
+  bio         String?
+
+  // Precio por sesión o tarifa base.
+  hourlyRate  Decimal  @default(0) @db.Decimal(10, 2)
+
+  // Disponibilidad semanal del entrenador en formato JSON.
+  // Ejemplo: horarios por días de la semana.
+  availability Json?
+
+  // Sirve para que el admin archive entrenadores sin borrarlos.
+  isArchived  Boolean  @default(false)
+
+  // Fecha en la que se archivó el entrenador, si aplica.
+  archivedAt  DateTime?
+
+  // Fecha en la que se creó el perfil.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización del perfil.
+  updatedAt   DateTime @updatedAt
+
+  // Clientes asignados a este entrenador.
+  clients       ClientProfile[]
+
+  // Ejercicios creados por este entrenador.
+  exercises     ExerciseDictionary[]
+
+  // Planes creados por este entrenador.
+  trainingPlans TrainingPlan[]
+
+  // Citas de este entrenador.
+  appointments  Appointment[]
+
+  // Suscripciones asociadas a este entrenador.
+  subscriptions Subscription[]
+
+  // Planes nutricionales creados por este entrenador.
+  nutritionPlans NutritionPlan[]
+
+  @@index([isArchived])
+  @@index([specialty])
+}

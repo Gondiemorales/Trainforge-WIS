@@ -1,0 +1,10 @@
+﻿This feature manages client progress tracking.
+
+Subfolders:
+- components/: progress charts, progress tables, log forms and exercise progress views.
+- server/: queries and actions for reading progress data and creating progress logs.
+- schemas/: validation schemas for progress log forms.
+- types/: TypeScript types related to progress logs and chart data.
+- utils/: progress-specific helpers, such as preparing chart data or calculating progress changes.
+
+This feature should contain everything related to ProgressLog and progress per exercise.

@@ -1,0 +1,9 @@
+﻿This feature manages authentication and session-related functionality.
+
+Subfolders:
+- components/: login forms, auth buttons and authentication UI.
+- server/: server-side login helpers, session helpers and user lookup logic.
+- schemas/: validation schemas for login forms and auth inputs.
+- types/: auth-related TypeScript types, such as login form state or session role data.
+
+This feature should handle who the user is, how they sign in, and how the app understands their role.

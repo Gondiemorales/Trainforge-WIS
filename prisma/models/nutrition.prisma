@@ -1,0 +1,56 @@
+// Esta tabla guarda planes nutricionales generados con IA.
+// El entrenador puede revisarlos antes de publicarlos.
+model NutritionPlan {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Entrenador que genera o revisa el plan.
+  trainerId   String   @db.Uuid
+  trainer     TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  // Cliente al que pertenece el plan nutricional.
+  clientId    String   @db.Uuid
+  client      ClientProfile @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Plan de entrenamiento relacionado, si aplica.
+  trainingPlanId String? @db.Uuid
+  trainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id], onDelete: SetNull)
+
+  // Título del plan nutricional.
+  title       String
+
+  // Estado del plan: borrador, publicado o archivado.
+  status      NutritionPlanStatus @default(DRAFT)
+
+  // Objetivo calórico: déficit, mantenimiento o superávit.
+  caloricGoal CaloricGoal
+
+  // Reparto de macronutrientes en JSON.
+  // Ejemplo: proteína, carbohidratos y grasas.
+  macroSplit  Json?
+
+  // Alergias o intolerancias indicadas por el cliente.
+  allergies   String?
+
+  // Preferencias dietéticas como vegan, keto, etc.
+  dietaryPreferences String?
+
+  // Prompt o datos enviados al modelo de IA.
+  aiPromptData Json?
+
+  // Resultado del plan de comidas en JSON.
+  // Ejemplo: días de la semana, comidas, ingredientes y calorías.
+  meals       Json
+
+  // Fecha en la que el entrenador publicó el plan.
+  publishedAt DateTime?
+
+  // Fecha en la que se creó el plan.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  @@index([trainerId])
+  @@index([clientId])
+  @@index([status])
+}

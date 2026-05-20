@@ -1,0 +1,9 @@
+﻿This folder contains shared components used across the whole application.
+
+Subfolders:
+- layout/: shared structure components such as dashboard shells, sidebars, navbars and page containers.
+- ui/: small reusable interface components such as buttons, cards, inputs, badges and modals.
+- feedback/: shared feedback components such as loading states, empty states, alerts and error messages.
+
+Important rule:
+Feature-specific components should not go here. For example, ClientForm should live in src/features/clients/components.

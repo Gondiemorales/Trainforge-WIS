@@ -1,0 +1,30 @@
+// Esta tabla guarda mensajes directos entre usuarios.
+// Sirve para chat entre entrenador y cliente.
+model Message {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Usuario que envía el mensaje.
+  senderId    String   @db.Uuid
+  sender      User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  // Usuario que recibe el mensaje.
+  receiverId  String   @db.Uuid
+  receiver    User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  // Contenido del mensaje.
+  content     String
+
+  // Indica si el mensaje ya fue leído.
+  isRead      Boolean  @default(false)
+
+  // Fecha en la que se leyó el mensaje.
+  readAt      DateTime?
+
+  // Fecha en la que se creó el mensaje.
+  createdAt   DateTime @default(now())
+
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([createdAt])
+  @@index([isRead])
+}

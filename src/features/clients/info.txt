@@ -1,0 +1,10 @@
+﻿This feature manages personal trainer clients.
+
+Subfolders:
+- components/: client tables, client cards, client forms and client detail UI.
+- server/: queries and actions for creating, reading, updating and deleting clients.
+- schemas/: validation schemas for client forms.
+- types/: TypeScript types related to clients and client form data.
+- utils/: client-specific helpers, such as formatting goals or experience levels.
+
+This feature should contain everything related to trainer-managed client profiles.

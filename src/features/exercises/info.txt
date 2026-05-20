@@ -1,0 +1,10 @@
+﻿This feature manages the exercise catalogue.
+
+Subfolders:
+- components/: exercise tables, exercise forms, exercise cards and exercise filters.
+- server/: queries and actions for creating, editing, listing and archiving exercises.
+- schemas/: validation schemas for exercise forms.
+- types/: TypeScript types related to exercises.
+- utils/: exercise-specific helpers, such as formatting muscle groups or difficulty levels.
+
+This feature should contain everything related to the ExerciseDictionary model.

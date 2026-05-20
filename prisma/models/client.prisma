@@ -1,0 +1,66 @@
+// Esta tabla guarda la información específica de un cliente.
+// Cada cliente pertenece a un entrenador.
+model ClientProfile {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Conecta este perfil con un usuario de tipo CLIENT.
+  userId      String   @unique @db.Uuid
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Entrenador asignado a este cliente.
+  trainerId   String   @db.Uuid
+  trainer     TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  // Objetivo principal del cliente.
+  goal        FitnessGoal
+
+  // Descripción más detallada del objetivo del cliente.
+  goalDescription String?
+
+  // Nivel de experiencia del cliente.
+  experienceLevel ExperienceLevel
+
+  // Horarios preferidos para citas, guardados en JSON.
+  preferredAppointmentTimes Json?
+
+  // Notas internas del entrenador sobre este cliente.
+  notes       String?
+
+  // Edad del cliente, opcional.
+  age         Int?
+
+  // Altura en centímetros, opcional.
+  heightCm    Decimal? @db.Decimal(5, 2)
+
+  // Peso actual en kg, opcional.
+  currentWeightKg Decimal? @db.Decimal(6, 2)
+
+  // Sirve para que el entrenador archive clientes sin borrar su historial.
+  isArchived  Boolean  @default(false)
+
+  // Fecha en la que se archivó el cliente, si aplica.
+  archivedAt  DateTime?
+
+  // Fecha en la que se creó el perfil.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización del perfil.
+  updatedAt   DateTime @updatedAt
+
+  // Planes de entrenamiento asignados al cliente.
+  trainingPlans TrainingPlan[]
+
+  // Citas del cliente.
+  appointments  Appointment[]
+
+  // Registros de progreso del cliente.
+  progressLogs  ProgressLog[]
+
+  // Planes nutricionales asignados al cliente.
+  nutritionPlans NutritionPlan[]
+
+  @@index([trainerId])
+  @@index([goal])
+  @@index([experienceLevel])
+  @@index([isArchived])
+}

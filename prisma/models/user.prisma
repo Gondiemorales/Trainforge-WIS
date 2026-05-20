@@ -1,0 +1,41 @@
+// Esta tabla guarda los usuarios principales de TrainForge.
+// Cada usuario puede ser admin, entrenador o cliente.
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+
+  // Guardamos el nombre visible del usuario.
+  name         String
+
+  // El email será único porque lo usaremos para iniciar sesión.
+  email        String   @unique
+
+  // Guardamos la contraseña cifrada, nunca la contraseña real.
+  passwordHash String
+
+  // El rol define qué puede ver y hacer cada usuario.
+  role         Role
+
+  // Permite desactivar usuarios sin borrarlos de la base de datos.
+  isActive     Boolean  @default(true)
+
+  // Fecha en la que se creó el usuario.
+  createdAt    DateTime @default(now())
+
+  // Fecha de la última actualización del usuario.
+  updatedAt    DateTime @updatedAt
+
+  // Relación opcional si este usuario es entrenador.
+  trainerProfile TrainerProfile?
+
+  // Relación opcional si este usuario es cliente.
+  clientProfile  ClientProfile?
+
+  // Mensajes enviados por este usuario.
+  sentMessages     Message[] @relation("SentMessages")
+
+  // Mensajes recibidos por este usuario.
+  receivedMessages Message[] @relation("ReceivedMessages")
+
+  @@index([role])
+  @@index([email])
+}

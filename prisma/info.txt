@@ -1,0 +1,10 @@
+﻿This folder contains the database setup for TrainForge.
+
+What goes here:
+- schema.prisma: Prisma generator and datasource configuration.
+- models/: split Prisma model files organised by database domain.
+- migrations/: generated database migrations. Do not edit unless you know exactly why.
+- seed.ts: demo data used for development and project demonstration.
+
+Important rule:
+Database structure lives here, but application logic should live in src/features.

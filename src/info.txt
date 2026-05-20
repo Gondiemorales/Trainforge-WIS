@@ -1,0 +1,8 @@
+﻿This folder contains the main source code of the TrainForge application.
+
+Main areas:
+- app/: Next.js routes, pages, layouts and API route handlers.
+- features/: business features organised by domain.
+- components/: shared UI and layout components used across multiple features.
+- lib/: shared low-level utilities such as Prisma, auth helpers and permissions.
+- generated/: generated code, such as Prisma Client. Do not edit generated files manually.

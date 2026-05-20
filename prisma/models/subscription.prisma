@@ -1,0 +1,40 @@
+// Esta tabla guarda las suscripciones SaaS de los entrenadores.
+// El admin podrá crearlas, listarlas, editarlas y archivarlas.
+model Subscription {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Entrenador al que pertenece esta suscripción.
+  trainerId   String   @db.Uuid
+  trainer     TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  // Tipo de plan contratado.
+  plan        SubscriptionPlan @default(FREE)
+
+  // Estado actual de la suscripción.
+  status      SubscriptionStatus @default(ACTIVE)
+
+  // Precio mensual de la suscripción.
+  monthlyPrice Decimal @default(0) @db.Decimal(10, 2)
+
+  // Fecha de inicio de la suscripción.
+  startsAt    DateTime @default(now())
+
+  // Fecha de finalización, si existe.
+  endsAt      DateTime?
+
+  // Archive se usa en vez de delete, como pide el enunciado.
+  isArchived  Boolean  @default(false)
+
+  // Fecha en la que se archivó la suscripción.
+  archivedAt  DateTime?
+
+  // Fecha en la que se creó la suscripción.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  @@index([trainerId])
+  @@index([status])
+  @@index([isArchived])
+}

@@ -1,0 +1,10 @@
+﻿This folder contains the Next.js App Router structure.
+
+What goes here:
+- page.tsx files for routes.
+- layout.tsx files for shared route layouts.
+- route.ts files for API handlers.
+- route groups such as (public), (auth) and (dashboard).
+
+Important rule:
+Keep route files small. Pages should load data, check access and render feature components, but heavy business logic should live inside src/features.

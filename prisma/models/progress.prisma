@@ -1,0 +1,50 @@
+// Esta tabla guarda el progreso del cliente por ejercicio.
+// Se usará para mostrar gráficas de progreso.
+model ProgressLog {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Cliente que registra el progreso.
+  clientId    String   @db.Uuid
+  client      ClientProfile @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Ejercicio sobre el que se registra el progreso.
+  exerciseId  String   @db.Uuid
+  exercise    ExerciseDictionary @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+
+  // Plan relacionado, si el progreso viene de un plan concreto.
+  trainingPlanId String? @db.Uuid
+  trainingPlan   TrainingPlan? @relation(fields: [trainingPlanId], references: [id], onDelete: SetNull)
+
+  // Ejercicio concreto dentro del plan, si aplica.
+  planExerciseId String? @db.Uuid
+  planExercise   PlanExercise? @relation(fields: [planExerciseId], references: [id], onDelete: SetNull)
+
+  // Fecha de la sesión o registro.
+  date        DateTime @default(now())
+
+  // Peso levantado en kg.
+  weightKg    Decimal? @db.Decimal(6, 2)
+
+  // Repeticiones realizadas.
+  reps        Int?
+
+  // Series realizadas.
+  sets        Int?
+
+  // Peso corporal del cliente en ese momento, opcional.
+  bodyWeightKg Decimal? @db.Decimal(6, 2)
+
+  // Notas del cliente o entrenador.
+  notes       String?
+
+  // Fecha en la que se creó el registro.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  @@index([clientId])
+  @@index([exerciseId])
+  @@index([trainingPlanId])
+  @@index([date])
+}

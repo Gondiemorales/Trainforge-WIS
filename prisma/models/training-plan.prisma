@@ -1,0 +1,105 @@
+// Esta tabla guarda los planes de entrenamiento.
+// Un entrenador crea un plan para un cliente concreto.
+model TrainingPlan {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Entrenador que crea el plan.
+  trainerId   String   @db.Uuid
+  trainer     TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  // Cliente al que se asigna el plan.
+  clientId    String   @db.Uuid
+  client      ClientProfile @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Título del plan, por ejemplo Strength Program Week 1.
+  title       String
+
+  // Descripción general del plan.
+  description String?
+
+  // Estado del plan: borrador, activo o archivado.
+  status      TrainingPlanStatus @default(DRAFT)
+
+  // Fecha de inicio del plan.
+  startDate   DateTime?
+
+  // Fecha de finalización del plan.
+  endDate     DateTime?
+
+  // Fecha en la que se creó el plan.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  // Ejercicios concretos incluidos en este plan.
+  exercises   PlanExercise[]
+
+  // Registros de progreso relacionados con este plan.
+  progressLogs ProgressLog[]
+
+  // Planes nutricionales relacionados con este plan, si se usan.
+  nutritionPlans NutritionPlan[]
+
+  @@index([trainerId])
+  @@index([clientId])
+  @@index([status])
+}
+
+// Esta tabla conecta un plan de entrenamiento con sus ejercicios.
+// Esto nos permite tener varios ejercicios dentro de un mismo plan.
+model PlanExercise {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Plan al que pertenece este ejercicio.
+  trainingPlanId String @db.Uuid
+  trainingPlan   TrainingPlan @relation(fields: [trainingPlanId], references: [id], onDelete: Cascade)
+
+  // Ejercicio elegido desde el catálogo.
+  exerciseId  String @db.Uuid
+  exercise    ExerciseDictionary @relation(fields: [exerciseId], references: [id], onDelete: Restrict)
+
+  // Posición del ejercicio dentro del plan.
+  position    Int
+
+  // Día de la semana opcional.
+  // Por ejemplo: 1 lunes, 2 martes, 3 miércoles.
+  dayOfWeek   Int?
+
+  // Nombre guardado como copia por si el ejercicio original cambia de nombre.
+  exerciseNameSnapshot String
+
+  // Descripción personalizada para este plan concreto.
+  description String?
+
+  // Series asignadas por el entrenador.
+  sets        Int
+
+  // Repeticiones asignadas por el entrenador.
+  reps        Int
+
+  // Descanso en segundos entre series.
+  restSeconds Int?
+
+  // Intensidad o carga recomendada, por ejemplo RPE 8 o 70% 1RM.
+  intensity   String?
+
+  // Dificultad asignada dentro de este plan.
+  difficulty  DifficultyLevel
+
+  // Notas extra para el cliente.
+  notes       String?
+
+  // Fecha en la que se añadió el ejercicio al plan.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  // Registros de progreso conectados a este ejercicio específico del plan.
+  progressLogs ProgressLog[]
+
+  @@index([trainingPlanId])
+  @@index([exerciseId])
+  @@unique([trainingPlanId, position])
+}

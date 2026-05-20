@@ -1,0 +1,60 @@
+// Esta tabla funciona como catálogo de ejercicios.
+// Puede contener ejercicios globales o ejercicios creados por un entrenador.
+model ExerciseDictionary {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Nombre del ejercicio, por ejemplo Bench Press o Squat.
+  name        String
+
+  // Grupo muscular principal, por ejemplo Chest, Legs o Back.
+  muscleGroup String
+
+  // Explicación del ejercicio.
+  description String
+
+  // Instrucciones técnicas del ejercicio.
+  instructions String?
+
+  // Dificultad base del ejercicio.
+  difficulty  DifficultyLevel
+
+  // Series recomendadas por defecto.
+  defaultSets Int?
+
+  // Repeticiones recomendadas por defecto.
+  defaultReps Int?
+
+  // Esquema flexible de carga/repeticiones por niveles.
+  // Esto nos permite guardar recomendaciones más avanzadas sin crear muchas columnas.
+  loadScheme  Json?
+
+  // Si es null, puede ser un ejercicio global.
+  // Si tiene valor, lo creó un entrenador concreto.
+  createdByTrainerId String? @db.Uuid
+  createdByTrainer   TrainerProfile? @relation(fields: [createdByTrainerId], references: [id], onDelete: SetNull)
+
+  // Marca ejercicios generales del sistema.
+  isGlobal    Boolean  @default(false)
+
+  // Permite ocultar ejercicios sin borrarlos.
+  isArchived  Boolean   @default(false)
+  archivedAt  DateTime?
+
+  // Fecha en la que se creó el ejercicio.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  // Apariciones de este ejercicio dentro de planes.
+  planExercises PlanExercise[]
+
+  // Registros de progreso asociados a este ejercicio.
+  progressLogs  ProgressLog[]
+
+  @@index([name])
+  @@index([muscleGroup])
+  @@index([difficulty])
+  @@index([createdByTrainerId])
+  @@index([isArchived])
+}

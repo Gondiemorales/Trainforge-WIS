@@ -1,0 +1,48 @@
+// Esta tabla guarda citas entre entrenador y cliente.
+// Sirve para la funcionalidad de calendario.
+model Appointment {
+  id          String   @id @default(uuid()) @db.Uuid
+
+  // Entrenador que participa en la cita.
+  trainerId   String   @db.Uuid
+  trainer     TrainerProfile @relation(fields: [trainerId], references: [id], onDelete: Cascade)
+
+  // Cliente que participa en la cita.
+  clientId    String   @db.Uuid
+  client      ClientProfile @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  // Título de la cita.
+  title       String
+
+  // Tipo de cita: videollamada, presencial o consulta.
+  type        AppointmentType @default(VIDEO_CALL)
+
+  // Estado de la cita.
+  status      AppointmentStatus @default(SCHEDULED)
+
+  // Hora de inicio.
+  startTime   DateTime
+
+  // Hora de finalización.
+  endTime     DateTime
+
+  // Enlace de reunión si es online.
+  meetingUrl  String?
+
+  // Lugar físico si es presencial.
+  location    String?
+
+  // Notas sobre la cita.
+  notes       String?
+
+  // Fecha en la que se creó la cita.
+  createdAt   DateTime @default(now())
+
+  // Fecha de la última actualización.
+  updatedAt   DateTime @updatedAt
+
+  @@index([trainerId])
+  @@index([clientId])
+  @@index([startTime])
+  @@index([status])
+}

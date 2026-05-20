@@ -1,0 +1,9 @@
+﻿This feature manages administrator functionality.
+
+Subfolders:
+- components/: admin dashboard cards, subscription tables and trainer management UI.
+- server/: admin-only queries and actions, such as listing trainers or archiving subscriptions.
+- schemas/: validation schemas for subscription and trainer admin forms.
+- types/: TypeScript types used by admin pages and admin components.
+
+This feature should focus on platform-level management, especially SaaS subscriptions and trainer accounts.

@@ -1,0 +1,12 @@
+// Este bloque genera el cliente de Prisma.
+// Ese cliente será el código TypeScript que usaremos para hablar con la base de datos.
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// Este bloque dice que usamos PostgreSQL.
+// La URL no va aquí porque Prisma 7 la lee desde prisma.config.ts.
+datasource db {
+  provider = "postgresql"
+}

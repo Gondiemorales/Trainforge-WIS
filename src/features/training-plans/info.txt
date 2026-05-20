@@ -1,0 +1,10 @@
+﻿This feature manages personalised training plans.
+
+Subfolders:
+- components/: plan builders, plan cards, assigned exercise lists and plan detail UI.
+- server/: queries and actions for creating, updating and archiving training plans.
+- schemas/: validation schemas for training plans and plan exercises.
+- types/: TypeScript types related to plans, plan exercises and form data.
+- utils/: plan-specific helpers, such as formatting sets, reps or training days.
+
+This feature should contain everything related to TrainingPlan and PlanExercise.

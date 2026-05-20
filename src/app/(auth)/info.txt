@@ -1,0 +1,101 @@
+﻿AUTH - EXPLICACIÓN SIMPLE
+
+Esta carpeta pertenece a las rutas de autenticación de Next.js.
+
+La carpeta se llama (auth), pero los paréntesis significan que NO aparece en la URL.
+Por ejemplo:
+
+src/app/(auth)/login/page.tsx
+
+crea esta ruta real:
+
+/login
+
+
+¿QUÉ VA AQUÍ?
+
+Aquí van las pantallas relacionadas con autenticación.
+
+Por ahora tenemos:
+
+login/page.tsx
+
+Esta página muestra la pantalla de login.
+
+
+¿QUÉ NO VA AQUÍ?
+
+Aquí no metemos la lógica pesada del login.
+
+No metemos:
+- consultas a la base de datos
+- comparación de contraseñas
+- validaciones grandes
+- lógica de Auth.js
+
+Todo eso vive en:
+
+src/features/auth
+
+
+FLUJO DEL LOGIN
+
+1. El usuario entra en /login.
+
+2. Next.js carga:
+
+src/app/(auth)/login/page.tsx
+
+3. Esa página comprueba si ya hay sesión.
+
+4. Si el usuario ya está logueado, lo manda a:
+
+/dashboard
+
+5. Si no está logueado, muestra:
+
+LoginCard
+
+Ese componente viene de:
+
+src/features/auth/components/LoginCard.tsx
+
+
+DÓNDE ESTÁ CADA PARTE
+
+Pantalla de login:
+src/app/(auth)/login/page.tsx
+
+Diseño visual del login:
+src/features/auth/components/LoginCard.tsx
+
+Formulario:
+src/features/auth/components/LoginForm.tsx
+
+Botón de login:
+src/features/auth/components/LoginSubmitButton.tsx
+
+Acción del servidor que intenta iniciar sesión:
+src/features/auth/server/login.action.ts
+
+Configuración principal de Auth.js:
+src/features/auth/server/auth.ts
+
+Validación del formulario:
+src/features/auth/schemas/login.schema.ts
+
+Comprobación del usuario en la base de datos:
+src/features/auth/server/verify-user-credentials.query.ts
+
+Comparación de contraseñas:
+src/features/auth/server/password.service.ts
+
+
+RESUMEN FÁCIL
+
+src/app/(auth) define la pantalla /login.
+
+src/features/auth contiene cómo funciona realmente el login.
+
+La página de login debe ser pequeña.
+La lógica importante debe estar separada en la feature de auth.

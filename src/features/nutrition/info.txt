@@ -1,0 +1,9 @@
+﻿This feature manages AI-assisted nutrition plans.
+
+Subfolders:
+- components/: nutrition forms, meal plan cards, editable meal plan views and published plan UI.
+- server/: queries and actions for generating, reviewing, publishing and reading nutrition plans.
+- schemas/: validation schemas for nutrition inputs, meal plans and AI-generated data.
+- types/: TypeScript types related to nutrition plans, meals, macros and AI responses.
+
+This feature should contain everything related to NutritionPlan and reviewed AI-assisted meal plans.

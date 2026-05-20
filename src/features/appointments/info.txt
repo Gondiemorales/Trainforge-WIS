@@ -1,0 +1,10 @@
+﻿This feature manages appointments and calendar scheduling.
+
+Subfolders:
+- components/: calendar views, appointment cards, appointment forms and scheduling UI.
+- server/: queries and actions for creating, updating, cancelling and listing appointments.
+- schemas/: validation schemas for appointment forms.
+- types/: TypeScript types related to appointments and calendar events.
+- utils/: appointment-specific helpers, such as formatting dates, times and statuses.
+
+This feature should contain everything related to booking and displaying client appointments.

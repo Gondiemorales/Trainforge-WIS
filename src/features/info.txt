@@ -1,0 +1,13 @@
+﻿This folder contains the main business features of TrainForge.
+
+Each feature is organised by domain, for example auth, clients, exercises, appointments or progress.
+
+Common subfolders inside features:
+- components/: UI components for that feature.
+- server/: server actions and database queries for that feature.
+- schemas/: validation schemas, usually with Zod.
+- types/: TypeScript types specific to that feature.
+- utils/: helper functions used only by that feature.
+
+Important rule:
+Keep feature logic close together so the project is easy to understand and review.

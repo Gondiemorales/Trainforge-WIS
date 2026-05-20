@@ -1,0 +1,81 @@
+// Este enum define los tipos de usuario que tendrá TrainForge.
+// Nos servirá para proteger páginas y funcionalidades según el rol.
+enum Role {
+  ADMIN
+  TRAINER
+  CLIENT
+}
+
+// Este enum define los niveles de experiencia de un cliente.
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+// Este enum define los objetivos principales de entrenamiento.
+enum FitnessGoal {
+  FAT_LOSS
+  MUSCLE_GAIN
+  STRENGTH
+  ENDURANCE
+  MOBILITY
+  GENERAL_FITNESS
+}
+
+// Este enum define la dificultad de un ejercicio o plan.
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+// Este enum define el estado de un plan de entrenamiento.
+enum TrainingPlanStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+// Este enum define el tipo de cita entre entrenador y cliente.
+enum AppointmentType {
+  VIDEO_CALL
+  IN_PERSON
+  CONSULTATION
+}
+
+// Este enum define el estado de una cita.
+enum AppointmentStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+// Este enum define los planes de suscripción del SaaS.
+enum SubscriptionPlan {
+  FREE
+  STARTER
+  PRO
+}
+
+// Este enum define el estado de una suscripción.
+enum SubscriptionStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  ARCHIVED
+}
+
+// Este enum define el objetivo calórico para el asistente nutricional.
+enum CaloricGoal {
+  DEFICIT
+  MAINTENANCE
+  SURPLUS
+}
+
+// Este enum define el estado de un plan nutricional generado con IA.
+enum NutritionPlanStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}

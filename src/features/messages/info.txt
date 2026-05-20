@@ -1,0 +1,9 @@
+﻿This feature manages direct messages between trainers and clients.
+
+Subfolders:
+- components/: conversation lists, message bubbles, chat panels and message input UI.
+- server/: queries and actions for reading conversations and sending messages.
+- schemas/: validation schemas for message forms.
+- types/: TypeScript types related to messages and conversations.
+
+This feature should contain everything related to trainer-client communication.

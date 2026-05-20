@@ -1,0 +1,11 @@
+﻿This folder contains shared low-level utilities used across the application.
+
+What goes here:
+- prisma.ts: the central database connection.
+- auth helpers: reusable authentication helpers.
+- permission helpers: reusable role and ownership checks.
+- formatters: shared date, currency or text formatting helpers.
+- small utilities used by multiple features.
+
+Important rule:
+Business logic such as creating clients, booking appointments or editing plans should not go here. That belongs inside src/features.
